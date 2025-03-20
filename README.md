@@ -82,3 +82,6 @@ Refactoring dibutuhkan agar struktur kode lebih rapi dan mudah dibaca namun fung
 
 ## (4) Commit 4 Reflection
 Jika kita membuka `127.0.0.1/sleep`, server akan memberhentikan eksekusi selama 5 detik. Selama pemberhentian ini, seluruh proses di server akan diblokir karena aplikasi masih berupa single-thread. Walaupun kita membuka `127.0.0.1/` di browser lain, jika permintaan sebelumnya (`127.0.0.1/sleep`) masih berjalan, permintaan yang baru akan di-delay sampai permintaan sebelumnya selesai. Hal ini disebabkan eksekusi single-thread hanya bisa memproses satu permintaan di satu waktu.
+
+## (5) Commit 5 Reflection
+ThreadPool bekerja dengan cara menggunakan ulang thread yang sudah ada, sekaligus menghindari server overload dengan membatasi jumlah request yang dijalankan bersamaan. ThreadPool memungkinkan eksekusi beberapa request di waktu yang bersamaan, dengan membagi request ke worker thread yang ada. Oleh karena itu, kita bisa menangani beberapa request sekaligus secara paralel dan lebih efisien.
