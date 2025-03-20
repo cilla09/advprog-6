@@ -59,3 +59,18 @@ Untuk membentuk respons yang akan dikirim ke klien.
 stream.write_all(response.as_bytes()).unwrap();
 ```
 Mengonversi respons menjadi byte dan mengirimkannya melalui `TcpStream`, sehingga dikirim kembali ke klien.
+
+## (2) Commit 3 Reflection
+### How to split between response
+Cara untuk memisahkan antara respon yang berbeda dilakukan berdasarkan tiga aspek, yaitu request method, path, dan HTTP version dari HTTP Headers. Berikut potongan kode yang bertanggung jawab atas ini.
+``` rust
+ let (status_line, filename) = if request_line == "GET / HTTP/1.1" {
+        ("HTTP/1.1 200 OK", "hello.html")
+    } else {
+        ("HTTP/1.1 404 NOT FOUND", "404.html")
+    };
+```
+Kode ini akan memisahkan respon berdasarkan request line, yaitu `GET / HTTP/1.1` berarti pada path `/` atau home page akan ditampilkan teks "Hello!", sementara path selain itu akan menampilkan teks "Oops!".
+
+### Why refactoring is needed
+Refactoring dibutuhkan agar struktur kode lebih rapi dan mudah dibaca namun fungsionalitas kode tetap terjaga. Pada milestone ini, refactoring membuat kode tidak redundant/terulang (di bagian definisi response, misalnya mendefinisikan `status_line`, menentukan `Content_Length`, dan sebagainya) dan membuat kode lebih jelas dan mudah untuk dipelihara serta diperbarui.
