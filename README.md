@@ -62,7 +62,7 @@ stream.write_all(response.as_bytes()).unwrap();
 ```
 Mengonversi respons menjadi byte dan mengirimkannya melalui `TcpStream`, sehingga dikirim kembali ke klien.
 
-## (2) Commit 3 Reflection
+## (3) Commit 3 Reflection
 ### How to split between response
 Cara untuk memisahkan antara respon yang berbeda dilakukan berdasarkan tiga aspek, yaitu request method, path, dan HTTP version dari HTTP Headers. Berikut potongan kode yang bertanggung jawab atas ini.
 ``` rust
@@ -76,3 +76,6 @@ Kode ini akan memisahkan respon berdasarkan request line, yaitu `GET / HTTP/1.1`
 
 ### Why refactoring is needed
 Refactoring dibutuhkan agar struktur kode lebih rapi dan mudah dibaca namun fungsionalitas kode tetap terjaga. Pada milestone ini, refactoring membuat kode tidak redundant/terulang (di bagian definisi response, misalnya mendefinisikan `status_line`, menentukan `Content_Length`, dan sebagainya) dan membuat kode lebih jelas dan mudah untuk dipelihara serta diperbarui.
+
+## (4) Commit 4 Reflection
+Jika kita membuka `127.0.0.1/sleep`, server akan memberhentikan eksekusi selama 5 detik. Selama pemberhentian ini, seluruh proses di server akan diblokir karena aplikasi masih berupa single-thread. Walaupun kita membuka `127.0.0.1/` di browser lain, jika permintaan sebelumnya (`127.0.0.1/sleep`) masih berjalan, permintaan yang baru akan di-delay sampai permintaan sebelumnya selesai. Hal ini disebabkan eksekusi single-thread hanya bisa memproses satu permintaan di satu waktu.
