@@ -34,7 +34,6 @@ println!("Request: {:#?}", http_request);
 Baris permintaan HTTP yang dikumpulkan dicetak dalam format debug, untuk membantu proses debugging.
 
 ## (2) Commit 2 Reflection
-![Screenshot (85)](https://github.com/user-attachments/assets/805523d3-7c5d-4bd5-ae0c-a3b627b2beb2)
 
 Setelah dimodifikasi, fungsi `handle_connection` sekarang berguna untuk membaca permintaan HTTP dan merespons dengan file HTML. 
 
